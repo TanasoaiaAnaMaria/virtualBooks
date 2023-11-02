@@ -33,4 +33,7 @@ public class Bonus {
     )
     private List<Beneficiu> beneficiiBonus = new ArrayList<>();
 
+    @ManyToMany(mappedBy = "bonusuri")
+    private List<Utilizator> utilizatori= new ArrayList<>();
+
 }

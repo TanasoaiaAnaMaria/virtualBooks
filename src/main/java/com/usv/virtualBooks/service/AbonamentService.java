@@ -6,6 +6,8 @@ import com.usv.virtualBooks.exceptions.CrudOperationException;
 import com.usv.virtualBooks.repository.AbonamentRepository;
 import com.usv.virtualBooks.repository.BeneficiuRepository;
 import com.usv.virtualBooks.repository.UtilizatorRepository;
+import jakarta.annotation.PostConstruct;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ public class AbonamentService {
     public final AbonamentRepository abonamentRepository;
     public final UtilizatorRepository utilizatorRepository;
     public final BeneficiuRepository beneficiuRepository;
+
 
     public AbonamentService(AbonamentRepository abonamentRepository, UtilizatorRepository utilizatorRepository, BeneficiuRepository beneficiuRepository) {
         this.abonamentRepository = abonamentRepository;
