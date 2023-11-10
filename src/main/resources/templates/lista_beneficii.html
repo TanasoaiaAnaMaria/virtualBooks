@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Listă Beneficii</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<h1>Listă Beneficii</h1>
+
+<button onclick="afiseazaBeneficii()">Afișează Beneficii</button>
+
+<table id="tabelBeneficii">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Categorii Adăugate</th>
+        <th>Cărți Adăugate</th>
+    </tr>
+    </thead>
+    <tbody id="listaBeneficii"></tbody>
+</table>
+
+<p id="mesaj"></p>
+
+<script>
+    function afiseazaBeneficii() {
+        fetch('http://localhost:8080/beneficiu/afisare')
+            .then(response => response.json())
+            .then(data => {
+                const listaBeneficii = document.getElementById('listaBeneficii');
+                listaBeneficii.innerHTML = ''; // Curăță lista anterioară
+
+                data.forEach(beneficiu => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${beneficiu.idBeneficiu}</td>
+                        <td>${beneficiu.nrCategoriiAdaugate}</td>
+                        <td>${beneficiu.nrCartiAdaugate}</td>
+                    `;
+                    listaBeneficii.appendChild(row);
+                });
+
+                const mesajElement = document.getElementById('mesaj');
+                mesajElement.textContent = "Lista beneficiilor a fost actualizată cu succes!";
+            })
+            .catch(error => {
+                console.error('Eroare:', error);
+                const mesajElement = document.getElementById('mesaj');
+                mesajElement.textContent = "Eroare la actualizarea listei de beneficii. Încearcă din nou.";
+            });
+    }
+</script>
+
+</body>
+</html>

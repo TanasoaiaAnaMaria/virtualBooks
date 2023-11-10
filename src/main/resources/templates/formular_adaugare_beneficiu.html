@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Adaugare Beneficiu</title>
+</head>
+<body>
+<h1>Adaugare Beneficiu</h1>
+
+<form action="http://localhost:8080/beneficiu/adauga" method="post" th:object="${beneficiu}">
+    <label for="nrCategoriiAdaugate">Număr Categorii Adăugate:</label>
+    <input type="text" id="nrCategoriiAdaugate" name="nrCategoriiAdaugate" th:field="*{nrCategoriiAdaugate}" /><br>
+
+    <label for="nrCartiAdaugate">Număr Cărți Adăugate:</label>
+    <input type="text" id="nrCartiAdaugate" name="nrCartiAdaugate" th:field="*{nrCartiAdaugate}" /><br>
+
+    <!-- Adaugă și alte câmpuri ale obiectului Beneficiu -->
+
+    <button type="submit">Adauga Beneficiu</button>
+</form>
+
+</body>
+</html>
