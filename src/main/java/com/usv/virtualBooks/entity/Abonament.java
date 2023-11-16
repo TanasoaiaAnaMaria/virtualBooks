@@ -1,6 +1,5 @@
 package com.usv.virtualBooks.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.usv.virtualBooks.enums.EnumTipAbonament;
 import jakarta.persistence.*;
 import lombok.*;
@@ -34,7 +33,7 @@ public class Abonament {
     @JoinColumn(name="idAbonament", referencedColumnName = "idAbonament")
     private List<Utilizator> utilizatori = new ArrayList<>();
 
-    @JsonIgnore
+
     @ManyToMany
     @JoinTable(
             name="abonament-beneficiu",

@@ -1,5 +1,6 @@
 package com.usv.virtualBooks.service;
 
+import com.usv.virtualBooks.dto.AbonamentDto;
 import com.usv.virtualBooks.entity.Abonament;
 import com.usv.virtualBooks.entity.Beneficiu;
 import com.usv.virtualBooks.exceptions.CrudOperationException;
@@ -45,15 +46,12 @@ public class AbonamentService {
     }
 
     public Abonament getAbonamentDupaId(UUID id){
-        return abonamentRepository.findById(id).orElseThrow(() -> {
-            throw new CrudOperationException(MESAJ_DE_EROARE);
-        });
+        return abonamentRepository.findById(id).orElseThrow(() -> new CrudOperationException(MESAJ_DE_EROARE));
 
     }
 
-    public Abonament adaugaAbonament(Abonament abonament){
+    public Abonament adaugaAbonament(AbonamentDto abonament){
         Abonament abonament1=Abonament.builder()
-                .idAbonament(abonament.getIdAbonament())
                 .numeAbonament(abonament.getNumeAbonament())
                 .sumaAbonament(abonament.getSumaAbonament())
                 .utilizatori(abonament.getUtilizatori())
@@ -64,13 +62,9 @@ public class AbonamentService {
     }
 
     public Abonament adaugaBeneficiuLaAbonament(UUID idAbonament, UUID idBeneficiu){
-        Abonament abonament=abonamentRepository.findById(idAbonament).orElseThrow(()->{
-            throw new CrudOperationException(MESAJ_DE_EROARE);
-        });
+        Abonament abonament=abonamentRepository.findById(idAbonament).orElseThrow(()-> new CrudOperationException(MESAJ_DE_EROARE));
 
-        Beneficiu divizie=beneficiuRepository.findById(idBeneficiu).orElseThrow(()->{
-            throw new CrudOperationException("Nu exista beneficiu");
-        });
+        Beneficiu divizie=beneficiuRepository.findById(idBeneficiu).orElseThrow(()-> new CrudOperationException("Nu exista beneficiu"));
 
         if(abonament.getBeneficii()==null)
             abonament.setBeneficii(new ArrayList<>());
@@ -80,4 +74,46 @@ public class AbonamentService {
 
         return abonament;
     }
+
+    public Abonament stergeBeneficiuDeLaAbonament(UUID idAbonament, UUID idBeneficiu) {
+        Abonament abonament = abonamentRepository.findById(idAbonament)
+                .orElseThrow(() -> new CrudOperationException(MESAJ_DE_EROARE));
+
+        Beneficiu beneficiu = beneficiuRepository.findById(idBeneficiu)
+                .orElseThrow(() -> new CrudOperationException("Nu există beneficiu"));
+
+        if (abonament.getBeneficii() != null) {
+            abonament.getBeneficii().remove(beneficiu);
+            abonamentRepository.save(abonament);
+        }
+
+        return abonament;
+    }
+
+    public List<Beneficiu> getBeneficiiPerAbonament(UUID idAbonament) {
+        Abonament abonament = abonamentRepository.findById(idAbonament)
+                .orElseThrow(() -> new CrudOperationException(MESAJ_DE_EROARE));
+
+        if (abonament.getBeneficii() != null) {
+            return abonament.getBeneficii();
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
+    public Abonament actualizareAbonament (UUID id, AbonamentDto abonament) {
+        Abonament abonamentExistent = abonamentRepository.findById(id).orElseThrow(() -> new CrudOperationException(MESAJ_DE_EROARE));
+
+        abonamentExistent.setNumeAbonament(abonament.getNumeAbonament());
+        abonamentExistent.setSumaAbonament(abonament.getSumaAbonament());
+
+        return abonamentRepository.save(abonamentExistent);
+    }
+
+    public void stergeAbonament (UUID id) {
+        Abonament abonamentExistent = abonamentRepository.findById(id).orElseThrow(() -> new CrudOperationException(MESAJ_DE_EROARE));
+
+        abonamentRepository.delete(abonamentExistent);
+    }
+
 }

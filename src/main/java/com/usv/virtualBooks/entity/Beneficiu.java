@@ -1,5 +1,7 @@
 package com.usv.virtualBooks.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,6 +23,7 @@ public class Beneficiu {
     private Integer nrCategoriiAdaugate;
     private Integer nrCartiAdaugate;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "beneficii")
     private List<Abonament> abonamente= new ArrayList<>();
 

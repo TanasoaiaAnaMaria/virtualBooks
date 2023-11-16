@@ -1,5 +1,6 @@
 package com.usv.virtualBooks.service;
 
+import com.usv.virtualBooks.dto.BeneficiuDto;
 import com.usv.virtualBooks.entity.Abonament;
 import com.usv.virtualBooks.entity.Beneficiu;
 import com.usv.virtualBooks.exceptions.CrudOperationException;
@@ -41,9 +42,8 @@ public class BeneficiuService {
 
     }
 
-    public Beneficiu adaugaBeneficiu(Beneficiu beneficiu){
+    public Beneficiu adaugaBeneficiu(BeneficiuDto beneficiu){
         Beneficiu beneficiu1=Beneficiu.builder()
-                .idBeneficiu(beneficiu.getIdBeneficiu())
                 .nrCategoriiAdaugate(beneficiu.getNrCategoriiAdaugate())
                 .nrCartiAdaugate(beneficiu.getNrCartiAdaugate())
                 .abonamente(beneficiu.getAbonamente())
@@ -51,5 +51,20 @@ public class BeneficiuService {
 
         beneficiuRepository.save(beneficiu1);
         return beneficiu1;
+    }
+
+    public Beneficiu actualizareBeneficiu (UUID id, BeneficiuDto beneficiu) {
+        Beneficiu beneficiuExistent = beneficiuRepository.findById(id).orElseThrow(() -> new CrudOperationException(MESAJ_DE_EROARE));
+
+        beneficiuExistent.setNrCategoriiAdaugate(beneficiu.getNrCategoriiAdaugate());
+        beneficiuExistent.setNrCartiAdaugate(beneficiu.getNrCartiAdaugate());
+
+        return beneficiuRepository.save(beneficiuExistent);
+    }
+
+    public void stergeBeneficiu (UUID id) {
+        Beneficiu beneficiuExistent = beneficiuRepository.findById(id).orElseThrow(() -> new CrudOperationException(MESAJ_DE_EROARE));
+
+        beneficiuRepository.delete(beneficiuExistent);
     }
 }
