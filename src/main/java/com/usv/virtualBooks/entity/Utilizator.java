@@ -1,5 +1,6 @@
 package com.usv.virtualBooks.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.usv.virtualBooks.enums.EnumTipAbonament;
 import jakarta.persistence.Entity;
@@ -33,6 +34,8 @@ public class Utilizator {
     private String parola;
 
     private UUID idAbonament;
+    @JsonFormat(pattern = "$data.configuration.format", shape = JsonFormat.Shape.STRING)
+    private String dataAbonare;
 
     private Integer nrMaxCategorii;
 

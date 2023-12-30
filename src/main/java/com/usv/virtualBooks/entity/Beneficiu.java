@@ -27,6 +27,7 @@ public class Beneficiu {
     @ManyToMany(mappedBy = "beneficii")
     private List<Abonament> abonamente= new ArrayList<>();
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "beneficiiBonus")
     private List<Bonus> bonusuri= new ArrayList<>();
 

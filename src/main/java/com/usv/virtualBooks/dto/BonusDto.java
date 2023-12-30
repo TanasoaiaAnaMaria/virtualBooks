@@ -1,13 +1,11 @@
 package com.usv.virtualBooks.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.usv.virtualBooks.entity.Abonament;
 import com.usv.virtualBooks.entity.Beneficiu;
 import com.usv.virtualBooks.entity.Bonus;
 import com.usv.virtualBooks.entity.Utilizator;
-import com.usv.virtualBooks.enums.EnumTipAbonament;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import lombok.*;
 
@@ -20,14 +18,13 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
-public class BeneficiuDto {
+public class BonusDto {
 
-    private Integer nrCategoriiAdaugate;
+    private String numeBonus;
 
-    private Integer nrCartiAdaugate;
+    private String conditiiBonus;
 
-//    private List<Abonament> abonamente= new ArrayList<>();
+//    private List<Beneficiu> beneficiiBonus = new ArrayList<>();
 //
-//    private List<Bonus> bonusuri= new ArrayList<>();
-
+//    private List<Utilizator> utilizatori= new ArrayList<>();
 }

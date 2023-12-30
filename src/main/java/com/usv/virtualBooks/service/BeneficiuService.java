@@ -46,7 +46,6 @@ public class BeneficiuService {
         Beneficiu beneficiu1=Beneficiu.builder()
                 .nrCategoriiAdaugate(beneficiu.getNrCategoriiAdaugate())
                 .nrCartiAdaugate(beneficiu.getNrCartiAdaugate())
-                .abonamente(beneficiu.getAbonamente())
                 .build();
 
         beneficiuRepository.save(beneficiu1);

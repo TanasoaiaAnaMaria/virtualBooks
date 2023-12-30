@@ -24,7 +24,7 @@ public class Bonus {
 
     private String conditiiBonus;
 
-    @JsonIgnore
+
     @ManyToMany
     @JoinTable(
             name="bonus-beneficiu",
