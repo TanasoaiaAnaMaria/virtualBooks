@@ -34,6 +34,8 @@ public class UtilizatorDto {
     @JsonFormat(pattern = "$data.configuration.format", shape = JsonFormat.Shape.STRING)
     private String dataAbonare;
 
+    private Boolean abonamentExpirat;
+
     private Integer nrMaxCategorii;
 
     private Integer nrMaxCarti;

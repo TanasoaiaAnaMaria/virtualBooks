@@ -34,7 +34,7 @@ public class Abonament {
     private List<Utilizator> utilizatori = new ArrayList<>();
 
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name="abonament-beneficiu",
             joinColumns = @JoinColumn(name="idAbonament"),

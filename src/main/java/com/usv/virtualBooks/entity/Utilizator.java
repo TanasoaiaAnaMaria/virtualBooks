@@ -3,6 +3,7 @@ package com.usv.virtualBooks.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.usv.virtualBooks.enums.EnumTipAbonament;
+import org.springframework.beans.factory.annotation.Value;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
@@ -37,15 +38,21 @@ public class Utilizator {
     @JsonFormat(pattern = "$data.configuration.format", shape = JsonFormat.Shape.STRING)
     private String dataAbonare;
 
+    @Value("${utilizator.default.abonamentExpirat:false}")
+    private Boolean abonamentExpirat;
+
+    @Value("${utilizator.default.nrMaxCategorii:1}")
     private Integer nrMaxCategorii;
 
+    @Value("${utilizator.default.nrMaxCarti:3}")
     private Integer nrMaxCarti;
 
+    @Value("${utilizator.default.nrCategoriiAdaugate:0}")
     private Integer nrCategoriiAdaugate;
 
+    @Value("${utilizator.default.nrCartiAdaugate:0}")
     private Integer nrCartiAdaugate;
 
-    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name="utilizator-bonus",
